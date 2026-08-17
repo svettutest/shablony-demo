@@ -501,11 +501,13 @@ body{
 }
 
 /* the house */
+/* all three cards keep the source 4:3 ratio, so nothing gets sliced into
+   a vertical sliver and the caption always matches what is in frame */
 .rooms{ display:grid;grid-template-columns:1fr;gap:14px;margin-top:40px; }
-@media(min-width:900px){ .rooms{ grid-template-columns:1.4fr 1fr; grid-auto-rows:minmax(0,auto); } }
+@media(min-width:820px){ .rooms{ grid-template-columns:repeat(3,1fr); } }
 .room{
   position:relative;overflow:hidden;border-radius:14px;
-  background:#1b1815;min-height:260px;display:flex;align-items:flex-end;
+  background:#1b1815;aspect-ratio:4/3;display:flex;align-items:flex-end;
 }
 .room img{
   position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
@@ -518,11 +520,6 @@ body{
 }
 .room h3{ margin:0 0 6px;font-size:clamp(19px,2.6vw,25px);font-weight:500;letter-spacing:-.02em; }
 .room p{ margin:0;font-size:14.5px;line-height:1.5;color:rgba(243,240,234,.78);max-width:42ch; }
-.room.tall{ min-height:340px; }
-@media(min-width:900px){
-  .room.tall{ grid-row:span 2;min-height:100%; }
-  .room{ min-height:300px; }
-}
 
 /* rates */
 .rates-list{ margin-top:36px;border-top:1px solid var(--hair); }
