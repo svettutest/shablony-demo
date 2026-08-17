@@ -49,15 +49,15 @@ const D = {
   ],
 
   gallery: [
+    "assets/work-polish.jpg",
+    "assets/work-film.jpg",
     "https://images.unsplash.com/photo-1632823469850-2f77dd9c7f93?w=1200&q=80&fm=jpg",
-    "https://images.unsplash.com/photo-1620584898989-d39f7f9ed1b7?w=1200&q=80&fm=jpg",
-    "https://images.unsplash.com/photo-1620584899131-a5ff5f8fbb03?w=1200&q=80&fm=jpg",
-    "https://images.unsplash.com/photo-1518306727298-4c17e1bf6942?w=1200&q=80&fm=jpg",
     "https://images.unsplash.com/photo-1605437241278-c1806d14a4d9?w=1200&q=80&fm=jpg",
+    "https://images.unsplash.com/photo-1518306727298-4c17e1bf6942?w=1200&q=80&fm=jpg",
     "https://images.unsplash.com/photo-1633014041037-f5446fb4ce99?w=1200&q=80&fm=jpg"
   ],
 
-  heroImage: "https://images.unsplash.com/photo-1567808291548-fc3ee04dbcf0?w=2000&q=80&fm=jpg"
+  heroImage: "assets/hero.webp"
 };
 </script>
 
@@ -108,7 +108,9 @@ const D = {
   .hero-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);will-change:transform}
   .hero-bg::after{
     content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(12,13,15,.74) 0%,rgba(12,13,15,.20) 28%,rgba(12,13,15,.56) 62%,rgba(12,13,15,.96) 100%);
+    /* яркий кузов забивает белый текст, поэтому гасим только нижнюю полосу:
+       верхние две трети машины остаются сочными */
+    background:linear-gradient(180deg,rgba(12,13,15,.70) 0%,rgba(12,13,15,.14) 20%,rgba(12,13,15,.26) 48%,rgba(12,13,15,.82) 68%,rgba(12,13,15,.98) 100%);
   }
   .hero-inner{position:relative;z-index:2;padding:0 var(--pad) calc(100px + var(--safe))}
   @media(min-width:720px){ .hero-inner{padding-bottom:calc(28px + var(--safe))} }

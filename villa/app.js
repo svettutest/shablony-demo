@@ -31,6 +31,27 @@
   else mq.addListener(function () { setMenu(false); });
   setMenu(false);
 
+  // reveal the sections below the hero as they come into view
+  var reveal = document.querySelectorAll('.up');
+  if (reveal.length) {
+    if (!('IntersectionObserver' in window) ||
+        matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      reveal.forEach(function (el) { el.classList.add('seen'); });
+    } else {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          if (!en.isIntersecting) return;
+          en.target.classList.add('seen');
+          io.unobserve(en.target);
+        });
+      }, { rootMargin: '0px 0px -12% 0px' });
+      reveal.forEach(function (el, i) {
+        el.style.transitionDelay = (i % 4) * 70 + 'ms';
+        io.observe(el);
+      });
+    }
+  }
+
   var btn = document.querySelector('.scroll__btn');
   if (btn) {
     btn.addEventListener('click', function () {

@@ -11,7 +11,7 @@
 <body>
 
 <section class="hero">
-  <img class="hero__bg" src="assets/hero.webp" alt="A dark timber villa with a thatched roof and an infinity pool above misty rice terraces" fetchpriority="high">
+  <img class="hero__bg" src="assets/hero.webp" alt="An open-air villa pavilion lit from within, with an infinity pool and loungers above misty rice terraces at dusk" fetchpriority="high">
   <div class="hero__scrim"></div>
 
   <h1 class="hero__title">
@@ -20,6 +20,12 @@
   </h1>
 
   <img class="hero__cutout" src="assets/hero-cutout.webp" alt="" aria-hidden="true">
+
+  <!-- second scrim, this one ABOVE the cutout: the lower copy sits on the
+       deck, which is part of the cutout plate, so the spec's scrim never
+       reaches it. Only the bottom band is darkened, the headline keeps
+       its occlusion. -->
+  <div class="hero__scrim--fg"></div>
 
   <nav class="nav" aria-label="Main">
     <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">
@@ -89,6 +95,93 @@
     </button>
   </div>
 </section>
+
+<main class="page">
+
+  <section>
+    <div class="inner">
+      <p class="eyebrow up">The house</p>
+      <h2 class="up">One pavilion, three rooms,<br>and nobody else on the land</h2>
+      <p class="lede up">The living room has no fourth wall. Breakfast, work, and the last drink of the day all happen in the same open room, with the valley doing the talking. Staff arrive in the morning and leave once the kitchen is clean.</p>
+
+      <div class="rooms">
+        <figure class="room tall up">
+          <img src="assets/gal-pool.jpg" alt="Infinity pool at dusk with loungers and lanterns">
+          <figcaption class="veil">
+            <h3>The pool</h3>
+            <p>Eighteen metres, heated, facing west. Lanterns go on at six and the water turns the colour of the sky.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="room up">
+          <img src="assets/gal-room.jpg" alt="Bedroom with a canopy bed opening onto the garden">
+          <figcaption class="veil">
+            <h3>The bedrooms</h3>
+            <p>Three, each opening straight onto the garden. Linen, blackout curtains, and air conditioning that is actually quiet.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="room up">
+          <img src="assets/gal-valley.jpg" alt="Rice terraces in morning mist">
+          <figcaption class="veil">
+            <h3>The valley</h3>
+            <p>Twelve minutes to Ubud centre. Far enough that the loudest thing at night is the frogs.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="inner">
+      <p class="eyebrow up">Rates</p>
+      <h2 class="up">Nightly, minimum three nights</h2>
+
+      <div class="rates-list">
+        <div class="rate-row up">
+          <b>Low season</b><span class="price">$180</span>
+          <span class="when">January to June, September to November</span>
+        </div>
+        <div class="rate-row up">
+          <b>High season</b><span class="price">$260</span>
+          <span class="when">July and August</span>
+        </div>
+        <div class="rate-row up">
+          <b>Peak</b><span class="price">$390</span>
+          <span class="when">20 December to 5 January, minimum seven nights</span>
+        </div>
+      </div>
+
+      <p class="note up">Breakfast, daily housekeeping and airport pickup are included. No cleaning fee, no service fee, no platform commission on top.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="inner">
+      <p class="eyebrow up">Gallery</p>
+      <h2 class="up">Ubud valley, west side</h2>
+      <div class="strip">
+        <figure class="up"><img class="wide" src="assets/gal-wide.jpg" alt="The villa and pool above the rice terraces"></figure>
+        <figure class="up"><img class="tallshot" src="assets/gal-valley.jpg" alt="Rice terraces below the villa"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="close">
+    <div class="inner">
+      <h2 class="up">Dates are held on<br>a first message basis</h2>
+      <p class="lede up">Write with your dates and how many of you there are. You will get an answer from the owner, usually within the hour.</p>
+      <div class="actions up">
+        <a class="cta" href="https://wa.me/6281200000000" target="_blank" rel="noopener">Check availability</a>
+        <a class="cta line" href="tel:+6281200000000">Call the villa</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Villa Sawah &middot; Ubud, Bali &middot; stay@villa-sawah.com
+  </footer>
+</main>
 
 <script src="app.js"></script>
 </body>
