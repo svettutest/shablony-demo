@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Villa Sawah</title>
+<meta name="description" content="A private villa above the Ubud rice fields, open-air pool, unbroken quiet.">
+<link rel="preload" as="image" href="assets/hero.webp">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<section class="hero">
+  <img class="hero__bg" src="assets/hero.webp" alt="A dark timber villa with a thatched roof and an infinity pool above misty rice terraces" fetchpriority="high">
+  <div class="hero__scrim"></div>
+
+  <h1 class="hero__title">
+    <span class="line"><span class="line__in">Villa</span></span>
+    <span class="line"><span class="line__in">Sawah</span></span>
+  </h1>
+
+  <img class="hero__cutout" src="assets/hero-cutout.webp" alt="" aria-hidden="true">
+
+  <nav class="nav" aria-label="Main">
+    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">
+      <span class="burger__box"><span></span><span></span></span>
+      <span class="u-sr">Menu</span>
+    </button>
+    <div class="nav__links" id="menu">
+      <a class="pill" href="#">home page</a>
+      <a class="pill" href="#">the house</a>
+      <a class="pill" href="#">the valley</a>
+      <a class="pill" href="#">rates</a>
+      <a class="pill pill--phone" href="tel:+6281200000000">+62 (812) 000-00-00</a>
+    </div>
+  </nav>
+
+  <div class="intro">
+    <h2 class="intro__head">
+      <span class="line"><span class="line__in">Three rooms, one pool,</span></span>
+      <span class="line"><span class="line__in">and a valley that</span></span>
+      <span class="line"><span class="line__in">answers slowly</span></span>
+    </h2>
+    <div class="intro__body">
+      <p>Every stay is arranged with<br>
+         the owner directly. No platform,<br>
+         no service fee, no front desk.<br>
+         For guests who keep their<br>
+         own hours and would<br>
+         rather not explain them.</p>
+      <span class="intro__year">{ 2026 }</span>
+    </div>
+  </div>
+
+  <div class="pins">
+    <figure class="pin pin--ridge">
+      <span class="pin__dot"></span>
+      <span class="pin__line"></span>
+      <div class="card">
+        <div class="card__thumb"><img src="assets/card-ridge.jpg" alt="Mist over the Ubud rice terraces" loading="lazy"></div>
+        <figcaption class="card__text">
+          <h3>Ubud<br>terraces</h3>
+          <p>The fields start at the<br>fence and run to the<br>treeline. The stream<br>below never stops.</p>
+        </figcaption>
+      </div>
+    </figure>
+
+    <figure class="pin pin--baths">
+      <span class="pin__dot"></span>
+      <span class="pin__line"></span>
+      <div class="card">
+        <figcaption class="card__text">
+          <h3>Open-air<br>pool</h3>
+          <p>Eighteen metres, heated.<br>Two of you. Or one.<br>Nobody overlooking.</p>
+        </figcaption>
+        <div class="card__thumb"><img src="assets/card-baths.jpg" alt="Steaming open-air stone pool on the deck" loading="lazy"></div>
+      </div>
+    </figure>
+  </div>
+
+  <div class="scroll">
+    <span class="scroll__label">keep going</span>
+    <button class="scroll__btn" aria-label="Scroll down">
+      <span class="scroll__disc">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 4.4 V18.9 M5.6 12.4 L12 18.9 L18.4 12.4"/>
+        </svg>
+      </span>
+    </button>
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>

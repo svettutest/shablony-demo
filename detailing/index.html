@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GRAFIT Detailing</title>
+<meta name="description" content="Детейлинг-студия: полировка, керамика, защитная плёнка, химчистка салона.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Unbounded:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- ============================================================
+     ДАННЫЕ КЛИЕНТА. Меняешь только этот блок, вёрстку не трогаешь.
+     ============================================================ -->
+<script>
+const D = {
+  brand:      "GRAFIT",
+  brandFull:  "GRAFIT Detailing",
+  city:       "Алматы",
+  phone:      "+7 700 000 00 00",
+  phoneHref:  "+77000000000",
+  whatsapp:   "77000000000",
+  address:    "ул. Розыбакиева 247, бокс 4",
+  hours:      "Ежедневно 09:00 – 21:00",
+  mapUrl:     "https://maps.google.com",
+
+  heroKicker: "Детейлинг-студия",
+  heroTitle:  "Машина выглядит<br>лучше, чем в салоне",
+  heroText:   "Полировка, керамика, защитная плёнка и химчистка салона. Работаем с одной машиной за раз, без конвейера и без спешки.",
+  heroCta:    "Записаться",
+
+  services: [
+    { name: "Полировка кузова",      price: "от 45 000 ₸", note: "Убираем риски и голограммы, возвращаем глубину цвета. 1–2 дня." },
+    { name: "Керамическое покрытие",  price: "от 90 000 ₸", note: "Защита на 2–3 года. Грязь не въедается, мойка занимает вдвое меньше." },
+    { name: "Защитная плёнка PPF",    price: "от 160 000 ₸", note: "Антигравийная плёнка на зоны удара или весь кузов. Сколов не будет." },
+    { name: "Химчистка салона",       price: "от 35 000 ₸", note: "Разбираем, чистим, сушим. Запахи и пятна уходят вместе с грязью." }
+  ],
+
+  stats: [
+    { n: "8 лет",  l: "на рынке" },
+    { n: "1 400+", l: "машин прошло" },
+    { n: "3 года", l: "гарантия на керамику" }
+  ],
+
+  why: [
+    { t: "Одна машина за раз",   d: "Мы не ставим четыре кузова в бокс. Ваша машина занимает пост целиком, пока работа не закончена." },
+    { t: "Показываем процесс",   d: "Присылаем фото и видео на каждом этапе. Вы видите, за что платите, не приезжая в бокс." },
+    { t: "Гарантия письменно",   d: "На керамику и плёнку выдаём гарантийный лист. Если что-то пошло не так, переделываем за свой счёт." }
+  ],
+
+  gallery: [
+    "https://images.unsplash.com/photo-1632823469850-2f77dd9c7f93?w=1200&q=80&fm=jpg",
+    "https://images.unsplash.com/photo-1620584898989-d39f7f9ed1b7?w=1200&q=80&fm=jpg",
+    "https://images.unsplash.com/photo-1620584899131-a5ff5f8fbb03?w=1200&q=80&fm=jpg",
+    "https://images.unsplash.com/photo-1518306727298-4c17e1bf6942?w=1200&q=80&fm=jpg",
+    "https://images.unsplash.com/photo-1605437241278-c1806d14a4d9?w=1200&q=80&fm=jpg",
+    "https://images.unsplash.com/photo-1633014041037-f5446fb4ce99?w=1200&q=80&fm=jpg"
+  ],
+
+  heroImage: "https://images.unsplash.com/photo-1567808291548-fc3ee04dbcf0?w=2000&q=80&fm=jpg"
+};
+</script>
+
+<style>
+  :root{
+    --bg:#0c0d0f;
+    --ink:#f0f1f3;
+    --dim:rgba(240,241,243,.62);
+    --line:rgba(240,241,243,.14);
+    --glass:rgba(240,241,243,.12);
+    --accent:#e8e4dc;
+    --pad:clamp(18px,5vw,56px);
+    --safe:env(safe-area-inset-bottom,0px);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:"Inter Tight",-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:16px;line-height:1.5;overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+
+  .wrap{padding-left:var(--pad);padding-right:var(--pad)}
+
+  /* ---------- header ---------- */
+  .hdr{
+    position:fixed;inset:0 0 auto 0;z-index:60;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px var(--pad);pointer-events:none;
+  }
+  .hdr>*{pointer-events:auto}
+  .pill{
+    border-radius:8px;background:var(--glass);
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  }
+  .logo{padding:7px 14px;font-family:"Unbounded",sans-serif;font-weight:600;font-size:14px;letter-spacing:.06em}
+  .hdr-cta{
+    padding:9px 16px;border-radius:8px;background:var(--ink);color:#0c0d0f;
+    font-size:14px;font-weight:600;letter-spacing:-.01em;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:0}
+  .hero-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);will-change:transform}
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(12,13,15,.74) 0%,rgba(12,13,15,.20) 28%,rgba(12,13,15,.56) 62%,rgba(12,13,15,.96) 100%);
+  }
+  .hero-inner{position:relative;z-index:2;padding:0 var(--pad) calc(100px + var(--safe))}
+  @media(min-width:720px){ .hero-inner{padding-bottom:calc(28px + var(--safe))} }
+  .kicker{
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0 0 14px;
+  }
+  h1{
+    margin:0;font-family:"Unbounded",sans-serif;font-weight:600;
+    font-size:clamp(30px,7.4vw,68px);line-height:1.06;letter-spacing:-.03em;
+  }
+  .hero-text{margin:16px 0 0;max-width:44ch;color:var(--dim);font-size:clamp(14px,3.4vw,17px)}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;border:none;cursor:pointer;
+    padding:14px 22px;border-radius:10px;font:inherit;font-weight:600;font-size:15px;
+    background:var(--ink);color:#0c0d0f;transition:transform .15s ease;
+  }
+  .btn:active{transform:scale(.98)}
+  .btn.ghost{background:var(--glass);color:var(--ink);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+  /* на мобилке звонок уже живёт в липкой панели снизу, второй раз не дублируем */
+  @media(max-width:719px){
+    .hero-actions .btn.ghost{display:none}
+    .hdr-cta{padding:8px 12px;font-size:13px}
+  }
+  .wordmark{
+    position:absolute;right:var(--pad);bottom:calc(28px + var(--safe));z-index:1;
+    margin:0;font-family:"Unbounded",sans-serif;font-weight:600;
+    font-size:clamp(52px,13vw,168px);line-height:.8;letter-spacing:-.04em;
+    color:rgba(240,241,243,.10);pointer-events:none;user-select:none;
+  }
+  @media(max-width:720px){ .wordmark{display:none} }
+
+  /* ---------- sections ---------- */
+  section{padding:clamp(56px,11vw,120px) 0}
+  .sec-head{margin:0 0 34px}
+  .sec-label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin:0 0 12px}
+  h2{margin:0;font-family:"Unbounded",sans-serif;font-weight:400;font-size:clamp(24px,5.4vw,44px);line-height:1.12;letter-spacing:-.02em}
+
+  /* services */
+  .svc{border-top:1px solid var(--line)}
+  .svc-row{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;
+    padding:22px 0;border-bottom:1px solid var(--line);
+  }
+  .svc-name{font-size:clamp(17px,4.4vw,24px);font-weight:600;letter-spacing:-.01em;flex:1 1 auto;min-width:60%}
+  .svc-price{font-family:"Unbounded",sans-serif;font-size:clamp(14px,3.6vw,18px);white-space:nowrap}
+  .svc-note{flex:1 1 100%;margin:2px 0 0;color:var(--dim);font-size:14px;max-width:56ch}
+
+  /* stats */
+  .stats{display:grid;grid-template-columns:1fr;gap:2px;background:var(--line);border:1px solid var(--line)}
+  .stat{background:var(--bg);padding:26px 22px}
+  .stat b{display:block;font-family:"Unbounded",sans-serif;font-weight:400;font-size:clamp(26px,7vw,44px);letter-spacing:-.02em}
+  .stat span{display:block;margin-top:6px;color:var(--dim);font-size:13px}
+  @media(min-width:720px){ .stats{grid-template-columns:repeat(3,1fr)} }
+
+  /* gallery */
+  .gal{display:grid;grid-template-columns:1fr;gap:10px}
+  .gal figure{margin:0;overflow:hidden;border-radius:10px;aspect-ratio:4/3;background:#141518}
+  .gal img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s cubic-bezier(.22,.61,.36,1)}
+  .gal figure:hover img{transform:scale(1.06)}
+  @media(min-width:600px){ .gal{grid-template-columns:1fr 1fr} }
+  @media(min-width:1000px){ .gal{grid-template-columns:repeat(3,1fr)} }
+
+  /* why */
+  .why{display:grid;grid-template-columns:1fr;gap:26px}
+  .why h3{margin:0 0 8px;font-size:clamp(17px,4.4vw,21px);font-weight:600;letter-spacing:-.01em}
+  .why p{margin:0;color:var(--dim);font-size:15px;max-width:44ch}
+  @media(min-width:820px){ .why{grid-template-columns:repeat(3,1fr);gap:34px} }
+
+  /* contact */
+  .contact{border-top:1px solid var(--line)}
+  .c-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-top:26px}
+  .c-row{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .c-row span:first-child{color:var(--dim);min-width:104px;flex:0 0 auto}
+  .c-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+
+  footer{padding:26px var(--pad) calc(104px + var(--safe));color:var(--dim);font-size:13px}
+  @media(min-width:720px){ footer{padding-bottom:34px} }
+
+  /* sticky mobile call bar */
+  .callbar{
+    position:fixed;left:0;right:0;bottom:0;z-index:70;
+    display:flex;gap:8px;padding:10px 12px calc(10px + var(--safe));
+    background:rgba(12,13,15,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-top:1px solid var(--line);
+  }
+  .callbar .btn{flex:1;justify-content:center;padding:14px 12px}
+  @media(min-width:720px){ .callbar{display:none} }
+
+  .rv{opacity:0;transform:translateY(24px)}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="logo pill" data-f="brand">GRAFIT</div>
+  <a class="hdr-cta" data-f="phone" data-href="tel">+7 700 000 00 00</a>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"><img id="heroImg" alt="" fetchpriority="high"></div>
+  <h2 class="wordmark" data-f="brand" aria-hidden="true">GRAFIT</h2>
+  <div class="hero-inner">
+    <p class="kicker"><span data-f="heroKicker"></span> · <span data-f="city"></span></p>
+    <h1 data-f="heroTitle"></h1>
+    <p class="hero-text" data-f="heroText"></p>
+    <div class="hero-actions">
+      <a class="btn" data-href="wa"><span data-f="heroCta"></span></a>
+      <a class="btn ghost" data-href="tel">Позвонить</a>
+    </div>
+  </div>
+</section>
+
+<section class="wrap svc-sec">
+  <div class="sec-head rv">
+    <p class="sec-label">Услуги и цены</p>
+    <h2>Честный прайс,<br>без «уточняйте по телефону»</h2>
+  </div>
+  <div class="svc" id="svc"></div>
+</section>
+
+<section class="wrap">
+  <div class="stats rv" id="stats"></div>
+</section>
+
+<section class="wrap">
+  <div class="sec-head rv">
+    <p class="sec-label">Работы</p>
+    <h2>Как это выглядит вживую</h2>
+  </div>
+  <div class="gal" id="gal"></div>
+</section>
+
+<section class="wrap">
+  <div class="sec-head rv">
+    <p class="sec-label">Почему мы</p>
+    <h2>Три причины<br>не искать дальше</h2>
+  </div>
+  <div class="why" id="why"></div>
+</section>
+
+<section class="wrap contact">
+  <div class="sec-head rv">
+    <p class="sec-label">Контакты</p>
+    <h2>Приезжайте или напишите</h2>
+  </div>
+  <div class="c-grid rv">
+    <div class="c-row"><span>Адрес</span><span data-f="address"></span></div>
+    <div class="c-row"><span>Часы</span><span data-f="hours"></span></div>
+    <div class="c-row"><span>Телефон</span><span data-f="phone"></span></div>
+  </div>
+  <div class="c-actions rv">
+    <a class="btn" data-href="wa">Написать в WhatsApp</a>
+    <a class="btn ghost" data-href="map">Открыть на карте</a>
+  </div>
+</section>
+
+<footer>
+  <span data-f="brandFull"></span> · <span data-f="city"></span>
+</footer>
+
+<nav class="callbar">
+  <a class="btn ghost" data-href="tel">Позвонить</a>
+  <a class="btn" data-href="wa">WhatsApp</a>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  // --- fill text fields ---
+  document.querySelectorAll("[data-f]").forEach(function(el){
+    var v = D[el.getAttribute("data-f")];
+    if (v != null) el.innerHTML = v;
+  });
+
+  // --- fill links ---
+  var links = {
+    tel: "tel:" + D.phoneHref,
+    wa:  "https://wa.me/" + D.whatsapp,
+    map: D.mapUrl
+  };
+  document.querySelectorAll("[data-href]").forEach(function(el){
+    var k = el.getAttribute("data-href");
+    if (links[k]) {
+      el.setAttribute("href", links[k]);
+      if (k !== "tel") { el.setAttribute("target","_blank"); el.setAttribute("rel","noopener"); }
+    }
+  });
+
+  document.getElementById("heroImg").src = D.heroImage;
+  document.title = D.brandFull;
+
+  // --- build lists ---
+  document.getElementById("svc").innerHTML = D.services.map(function(s){
+    return '<div class="svc-row rv"><span class="svc-name">'+s.name+'</span>'+
+           '<span class="svc-price">'+s.price+'</span>'+
+           '<p class="svc-note">'+s.note+'</p></div>';
+  }).join("");
+
+  document.getElementById("stats").innerHTML = D.stats.map(function(s){
+    return '<div class="stat"><b>'+s.n+'</b><span>'+s.l+'</span></div>';
+  }).join("");
+
+  document.getElementById("gal").innerHTML = D.gallery.map(function(src,i){
+    return '<figure class="rv"><img src="'+src+'" alt="" loading="'+(i<2?'eager':'lazy')+'"></figure>';
+  }).join("");
+
+  document.getElementById("why").innerHTML = D.why.map(function(w){
+    return '<div class="rv"><h3>'+w.t+'</h3><p>'+w.d+'</p></div>';
+  }).join("");
+
+  // --- motion ---
+  if (window.gsap) {
+    gsap.registerPlugin(ScrollTrigger);
+    var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    gsap.set(".rv", { opacity: 0, y: reduced ? 0 : 24 });
+    gsap.utils.toArray(".rv").forEach(function(el){
+      gsap.to(el, {
+        opacity: 1, y: 0, duration: .8, ease: "power3.out",
+        scrollTrigger: { trigger: el, start: "top 88%", once: true }
+      });
+    });
+
+    // hero entrance
+    var tl = gsap.timeline({ delay: .15 });
+    tl.from(".kicker",      { opacity:0, y:reduced?0:16, duration:.7, ease:"power3.out" })
+      .from("h1",           { opacity:0, y:reduced?0:28, duration:.9, ease:"power3.out" }, "-=.45")
+      .from(".hero-text",   { opacity:0, y:reduced?0:20, duration:.8, ease:"power3.out" }, "-=.6")
+      .from(".hero-actions",{ opacity:0, y:reduced?0:20, duration:.8, ease:"power3.out" }, "-=.6")
+      .from(".wordmark",    { opacity:0, duration:1.2, ease:"power2.out" }, "-=.9");
+
+    // slow parallax push on the hero photo
+    if (!reduced) {
+      gsap.to(".hero-bg img", {
+        yPercent: 10, scale: 1.12, ease: "none",
+        scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: .5 }
+      });
+    }
+  } else {
+    document.querySelectorAll(".rv").forEach(function(el){ el.style.opacity = 1; el.style.transform = "none"; });
+  }
+})();
+</script>
+</body>
+</html>
