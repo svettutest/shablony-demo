@@ -3,185 +3,117 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Villa Sawah</title>
-<meta name="description" content="A private villa above the Ubud rice fields, open-air pool, unbroken quiet.">
-<link rel="preload" as="image" href="assets/hero.webp">
+<title>Sawah.</title>
+<meta name="description" content="A private villa above the Ubud valley, hosted by the people who built it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<section class="hero">
-  <img class="hero__bg" src="assets/hero.webp" alt="An open-air villa pavilion lit from within, with an infinity pool and loungers above misty rice terraces at dusk" fetchpriority="high">
-  <div class="hero__scrim"></div>
-
-  <h1 class="hero__title">
-    <span class="line"><span class="line__in">Villa</span></span>
-    <span class="line"><span class="line__in">Sawah</span></span>
-  </h1>
-
-  <img class="hero__cutout" src="assets/hero-cutout.webp" alt="" aria-hidden="true">
-
-  <!-- second scrim, this one ABOVE the cutout: the lower copy sits on the
-       deck, which is part of the cutout plate, so the spec's scrim never
-       reaches it. Only the bottom band is darkened, the headline keeps
-       its occlusion. -->
-  <div class="hero__scrim--fg"></div>
-
-  <nav class="nav" aria-label="Main">
-    <button class="burger" id="burger" aria-expanded="false" aria-controls="menu">
-      <span class="burger__box"><span></span><span></span></span>
-      <span class="u-sr">Menu</span>
-    </button>
-    <div class="nav__links" id="menu">
-      <a class="pill" href="#">home page</a>
-      <a class="pill" href="#">the house</a>
-      <a class="pill" href="#">the valley</a>
-      <a class="pill" href="#">rates</a>
-      <a class="pill pill--phone" href="tel:+6281200000000">+62 (812) 000-00-00</a>
-    </div>
-  </nav>
-
-  <div class="intro">
-    <h2 class="intro__head">
-      <span class="line"><span class="line__in">Three rooms, one pool,</span></span>
-      <span class="line"><span class="line__in">and a valley that</span></span>
-      <span class="line"><span class="line__in">answers slowly</span></span>
-    </h2>
-    <div class="intro__body">
-      <p>Every stay is arranged with<br>
-         the owner directly. No platform,<br>
-         no service fee, no front desk.<br>
-         For guests who keep their<br>
-         own hours and would<br>
-         rather not explain them.</p>
-      <span class="intro__year">{ 2026 }</span>
-    </div>
+<!-- Section 1 — preloader -->
+<div class="preloader" id="preloader">
+  <div class="pre-word">
+    <span class="pre-letters" id="preLetters"></span>
+    <span class="pre-cursor" id="preCursor"></span>
   </div>
+</div>
 
-  <div class="pins">
-    <figure class="pin pin--ridge">
-      <span class="pin__dot"></span>
-      <span class="pin__line"></span>
-      <div class="card">
-        <div class="card__thumb"><img src="assets/card-ridge.jpg" alt="Mist over the Ubud rice terraces" loading="lazy"></div>
-        <figcaption class="card__text">
-          <h3>Ubud<br>terraces</h3>
-          <p>The fields start at the<br>fence and run to the<br>treeline. The stream<br>below never stops.</p>
-        </figcaption>
-      </div>
-    </figure>
+<!-- Section 2 — fixed nav -->
+<nav class="nav" id="nav">
+  <a class="nav-logo" href="#top">Sawah<span class="dot">.</span></a>
+  <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+    <span class="bar top"></span><span class="bar bottom"></span>
+  </button>
+</nav>
 
-    <figure class="pin pin--baths">
-      <span class="pin__dot"></span>
-      <span class="pin__line"></span>
-      <div class="card">
-        <figcaption class="card__text">
-          <h3>Open-air<br>pool</h3>
-          <p>Eighteen metres, heated.<br>Two of you. Or one.<br>Nobody overlooking.</p>
-        </figcaption>
-        <div class="card__thumb"><img src="assets/card-baths.jpg" alt="Steaming open-air stone pool on the deck" loading="lazy"></div>
-      </div>
-    </figure>
+<div class="menu" id="menu">
+  <a href="#rooms">Rooms</a>
+  <a href="#story">Story</a>
+  <a href="#rates">Rates</a>
+  <a href="#inquire">Inquire</a>
+</div>
+
+<!-- Section 4 — the pavilion that travels on scroll -->
+<div class="house-wrap" id="houseWrap" aria-hidden="true">
+  <div class="house-inner" id="houseInner">
+    <img id="houseImg" src="assets/pavilion.webp" alt="">
   </div>
+</div>
 
-  <div class="scroll">
-    <span class="scroll__label">keep going</span>
-    <button class="scroll__btn" aria-label="Scroll down">
-      <span class="scroll__disc">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M12 4.4 V18.9 M5.6 12.4 L12 18.9 L18.4 12.4"/>
-        </svg>
-      </span>
-    </button>
+<!-- Section 3 — hero -->
+<section class="hero" id="top">
+  <div class="hero-text" id="heroText">
+    <div class="hero-top">
+      <h1 class="hero-small">STAY IN</h1>
+      <p class="hero-sub-desktop">A private villa above the Ubud valley,<br>hosted by the people who built it.</p>
+    </div>
+    <div class="hero-big-wrap">
+      <h1 class="hero-big">UNHURRIED</h1>
+    </div>
+    <p class="hero-sub-mobile">A private villa above the Ubud<br>valley, hosted by its owners.</p>
   </div>
 </section>
 
-<main class="page">
+<!-- Section 5 — dark statement + stats -->
+<div class="dark-outer" id="darkOuter">
+  <div class="dark-spacer"></div>
+  <section class="dark" id="story">
+    <div class="dark-content">
+      <p class="statement">Every stay here is arranged by hand,
+through a frame of quiet, space,
+and the hours you keep. Service is not
+a performance. It is the house working.</p>
 
-  <section>
-    <div class="inner">
-      <p class="eyebrow up">The house</p>
-      <h2 class="up">One pavilion, three rooms,<br>and nobody else on the land</h2>
-      <p class="lede up">The living room has no fourth wall. Breakfast, work, and the last drink of the day all happen in the same open room, with the valley doing the talking. Staff arrive in the morning and leave once the kitchen is clean.</p>
-
-      <div class="rooms">
-        <figure class="room up">
-          <img src="assets/gal-pool.jpg" alt="Infinity pool at dusk with loungers and lanterns">
-          <figcaption class="veil">
-            <h3>The pool</h3>
-            <p>Eighteen metres, heated, facing west. Lanterns go on at six and the water turns the colour of the sky.</p>
-          </figcaption>
-        </figure>
-
-        <figure class="room up">
-          <img src="assets/gal-room.jpg" alt="Bedroom with a canopy bed opening onto the garden">
-          <figcaption class="veil">
-            <h3>The bedrooms</h3>
-            <p>Three, each opening straight onto the garden. Linen, blackout curtains, and air conditioning that is actually quiet.</p>
-          </figcaption>
-        </figure>
-
-        <figure class="room up">
-          <img src="assets/gal-valley.jpg" alt="Rice terraces in morning mist">
-          <figcaption class="veil">
-            <h3>The valley</h3>
-            <p>Twelve minutes to Ubud centre. Far enough that the loudest thing at night is the frogs.</p>
-          </figcaption>
-        </figure>
+      <div class="stats" id="stats">
+        <div class="stat"><b data-count="3">0</b><span>Bedrooms</span></div>
+        <div class="stat"><b data-count="18" data-suffix=" m">0</b><span>Infinity pool</span></div>
+        <div class="stat"><b data-count="94" data-suffix="%">0</b><span>Guests who return</span></div>
       </div>
     </div>
   </section>
+</div>
 
-  <section>
-    <div class="inner">
-      <p class="eyebrow up">Rates</p>
-      <h2 class="up">Nightly, minimum three nights</h2>
-
-      <div class="rates-list">
-        <div class="rate-row up">
-          <b>Low season</b><span class="price">$180</span>
-          <span class="when">January to June, September to November</span>
-        </div>
-        <div class="rate-row up">
-          <b>High season</b><span class="price">$260</span>
-          <span class="when">July and August</span>
-        </div>
-        <div class="rate-row up">
-          <b>Peak</b><span class="price">$390</span>
-          <span class="when">20 December to 5 January, minimum seven nights</span>
-        </div>
-      </div>
-
-      <p class="note up">Breakfast, daily housekeeping and airport pickup are included. No cleaning fee, no service fee, no platform commission on top.</p>
+<!-- Section 6 — hover-expand gallery -->
+<section class="gallery" id="rooms">
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track">
+      <span>Sawah. &nbsp; Sawah. &nbsp; Sawah. &nbsp; Sawah. &nbsp; Sawah. &nbsp; Sawah. &nbsp; Sawah. &nbsp; Sawah. &nbsp;</span>
+      <span>Sawah. &nbsp; Sawah. &nbsp; Sawah. &nbsp; Sawah. &nbsp; Sawah. &nbsp; Sawah. &nbsp; Sawah. &nbsp; Sawah. &nbsp;</span>
     </div>
-  </section>
-
-  <section>
-    <div class="inner">
-      <p class="eyebrow up">Gallery</p>
-      <h2 class="up">Ubud valley, west side</h2>
-      <div class="strip">
-        <figure class="up"><img class="wide" src="assets/gal-wide.jpg" alt="The villa and pool above the rice terraces"></figure>
-        <figure class="up"><img class="tallshot" src="assets/gal-valley.jpg" alt="Rice terraces below the villa"></figure>
-      </div>
+  </div>
+  <div class="gallery-content">
+    <div class="expand-row" id="expandRow">
+      <div class="expand-item"><video src="assets/pool.mp4"   poster="assets/pool.jpg"   autoplay loop muted playsinline preload="metadata"></video></div>
+      <div class="expand-item"><video src="assets/bed.mp4"    poster="assets/bed.jpg"    autoplay loop muted playsinline preload="metadata"></video></div>
+      <div class="expand-item"><video src="assets/living.mp4" poster="assets/living.jpg" autoplay loop muted playsinline preload="metadata"></video></div>
+      <div class="expand-item"><video src="assets/bath.mp4"   poster="assets/bath.jpg"   autoplay loop muted playsinline preload="metadata"></video></div>
+      <div class="expand-item"><video src="assets/garden.mp4" poster="assets/garden.jpg" autoplay loop muted playsinline preload="metadata"></video></div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="close">
-    <div class="inner">
-      <h2 class="up">Dates are held on<br>a first message basis</h2>
-      <p class="lede up">Write with your dates and how many of you there are. You will get an answer from the owner, usually within the hour.</p>
-      <div class="actions up">
+<!-- closing -->
+<section class="closing" id="rates">
+  <div class="closing-inner">
+    <p class="eyebrow">Rates</p>
+    <div class="rate"><b>Low season</b><span class="when">Jan to Jun, Sep to Nov</span><span class="price">$180</span></div>
+    <div class="rate"><b>High season</b><span class="when">Jul and Aug</span><span class="price">$260</span></div>
+    <div class="rate"><b>Peak</b><span class="when">20 Dec to 5 Jan, seven nights minimum</span><span class="price">$390</span></div>
+    <p class="note">Per night, three nights minimum. Breakfast, daily housekeeping and airport pickup included. No cleaning fee, no service fee, no platform commission.</p>
+
+    <div class="inquire" id="inquire">
+      <h2>Write with your dates</h2>
+      <p>The owner answers, usually within the hour.</p>
+      <div class="acts">
         <a class="cta" href="https://wa.me/6281200000000" target="_blank" rel="noopener">Check availability</a>
-        <a class="cta line" href="tel:+6281200000000">Call the villa</a>
+        <a class="cta ghost" href="tel:+6281200000000">Call the villa</a>
       </div>
     </div>
-  </section>
-
-  <footer>
-    Villa Sawah &middot; Ubud, Bali &middot; stay@villa-sawah.com
-  </footer>
-</main>
+  </div>
+  <footer>Sawah. &middot; Ubud, Bali &middot; stay@villa-sawah.com</footer>
+</section>
 
 <script src="app.js"></script>
 </body>
