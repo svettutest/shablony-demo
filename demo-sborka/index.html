@@ -188,19 +188,34 @@ let last = '', started = null, lastSeen = 0, deviceW = 1280, phase = 'idle';
    (file://), fetch запрещён браузером, поэтому подключаем progress.js
    тегом script: он кладёт то же состояние в window.__BUILD__.        */
 let mode = 'fetch';   // упал один раз, дальше не долбимся в него каждые 700мс
+
+/* Запрос, который завис, не должен останавливать всё окно. */
+function guard(pr, ms) {
+  return new Promise((ok, fail) => {
+    const id = setTimeout(() => fail('долго'), ms);
+    pr.then(v => { clearTimeout(id); ok(v); }, e => { clearTimeout(id); fail(e); });
+  });
+}
+
 function load() {
   const bust = Date.now();
+  // запись прогона сама считает своё состояние, сеть больше не нужна
+  if (mode === 'player') return Promise.resolve(window.__PLAYER__());
   const viaScript = () => new Promise((ok, fail) => {
     const el = document.createElement('script');
     el.src = 'progress.js?t=' + bust;
-    el.onload = () => { el.remove(); window.__BUILD__ ? ok(window.__BUILD__) : fail(0); };
+    el.onload = () => {
+      el.remove();
+      if (window.__PLAYER__) { mode = 'player'; ok(window.__PLAYER__()); return; }
+      window.__BUILD__ ? ok(window.__BUILD__) : fail(0);
+    };
     el.onerror = () => { el.remove(); fail(0); };
     document.head.appendChild(el);
   });
-  if (mode === 'script') return viaScript();
-  return fetch('progress.json?t=' + bust, { cache: 'no-store' })
-    .then(r => r.ok ? r.json() : Promise.reject(r.status))
-    .catch(() => { mode = 'script'; return viaScript(); });
+  if (mode === 'script') return guard(viaScript(), 4000);
+  return guard(fetch('progress.json?t=' + bust, { cache: 'no-store' })
+    .then(r => r.ok ? r.json() : Promise.reject(r.status)), 4000)
+    .catch(() => { mode = 'script'; return guard(viaScript(), 4000); });
 }
 
 const ST = { wait: 'wait', run: 'run', done: 'done', warn: 'warn' };

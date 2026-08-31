@@ -2,7 +2,7 @@
    Состояние считается от времени, поэтому окно оживает так же, как на живой
    сборке: страница перечитывает этот файл каждые 700мс и получает следующий
    кадр. Петля 96 секунд. */
-(function () {
+window.__PLAYER__ = function () {
   var LOOP = 96;
   var t = (Date.now() / 1000) % LOOP;
 
@@ -126,7 +126,7 @@
   var active = (STEPS.filter(function (s) { return t >= s.at && t < s.till; })[0]
              || STEPS[STEPS.length - 1]).id;
 
-  window.__BUILD__ = {
+  return {
     clinic: 'Comfort Dental',
     subtitle: 'запись прогона, повторяется каждые полторы минуты',
     startedAt: new Date(Date.now() - t * 1000).toISOString(),
@@ -136,4 +136,5 @@
     log: LOG.filter(function (l) { return t >= l[0]; })
             .map(function (l) { return { t: clock(l[0]), m: l[1] }; })
   };
-})();
+};
+window.__BUILD__ = window.__PLAYER__();
