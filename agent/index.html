@@ -538,26 +538,52 @@ Lumi-Dent закрыт от ботов (403).
 
   var agents = [], active = 0, blink = 0;
 
-  function drawFloor(){
+  /* фон статичен: рисуем один раз, тонируем под интерфейс и кэшируем */
+  var bg = null;
+  function buildBackground(){
+    bg = document.createElement('canvas');
+    bg.width = COLS * TILE; bg.height = ROWS * TILE;
+    var b = bg.getContext('2d');
+    b.imageSmoothingEnabled = false;
+
     for(var y = 0; y < ROWS; y++){
       for(var x = 0; x < COLS; x++){
         if(y < 3){
-          if(img.wall) cx.drawImage(img.wall, 16, 16, 16, 16, x * TILE, y * TILE, TILE, TILE);
+          if(img.wall) b.drawImage(img.wall, 16, 16, 16, 16, x * TILE, y * TILE, TILE, TILE);
         } else {
           var t = ((x * 3 + y * 5) % 11 === 0 && img.floor_alt) ? img.floor_alt : img.floor;
-          if(t) cx.drawImage(t, 0, 0, 16, 16, x * TILE, y * TILE, TILE, TILE);
+          if(t) b.drawImage(t, 0, 0, 16, 16, x * TILE, y * TILE, TILE, TILE);
         }
       }
     }
-    cx.fillStyle = 'rgba(9,13,20,.62)';
-    cx.fillRect(0, 0, COLS * TILE, 3 * TILE);
-    cx.fillStyle = 'rgba(9,13,20,.30)';
-    cx.fillRect(0, 3 * TILE, COLS * TILE, (ROWS - 3) * TILE);
     if(img.carpet && CARPET){
       for(var cy = CARPET[1]; cy <= CARPET[3]; cy++)
         for(var k = CARPET[0]; k <= CARPET[2]; k++)
-          cx.drawImage(img.carpet, 0, 0, 16, 16, k * TILE, cy * TILE, TILE, TILE);
+          b.drawImage(img.carpet, 0, 0, 16, 16, k * TILE, cy * TILE, TILE, TILE);
     }
+
+    /* перекрашиваем пол и стены в палитру интерфейса */
+    b.globalCompositeOperation = 'color';
+    b.fillStyle = '#14293b';
+    b.fillRect(0, 0, bg.width, bg.height);
+
+    b.globalCompositeOperation = 'multiply';
+    b.fillStyle = '#7d94b4';
+    b.fillRect(0, 0, bg.width, bg.height);
+
+    b.globalCompositeOperation = 'source-over';
+    b.fillStyle = 'rgba(6,10,17,.55)';
+    b.fillRect(0, 0, bg.width, 3 * TILE);
+    var g = b.createLinearGradient(0, 3 * TILE, 0, bg.height);
+    g.addColorStop(0, 'rgba(60,224,192,.05)');
+    g.addColorStop(1, 'rgba(6,10,17,.35)');
+    b.fillStyle = g;
+    b.fillRect(0, 3 * TILE, bg.width, bg.height - 3 * TILE);
+  }
+
+  function drawFloor(){
+    if(!bg) buildBackground();
+    cx.drawImage(bg, 0, 0);
   }
 
   function pcOn(){
@@ -573,7 +599,10 @@ Lumi-Dent закрыт от ботов (403).
       var im = img[o[0]];
       if(!im) return;
       items.push({y: o[2] * TILE + TILE, draw: function(){
+        cx.save();
+        cx.filter = 'saturate(.72) brightness(.86) hue-rotate(-8deg)';
         cx.drawImage(im, o[1] * TILE, o[2] * TILE + TILE - im.height);
+        cx.restore();
       }});
     });
 
