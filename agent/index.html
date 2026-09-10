@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html,body{margin:0;padding:0}img{max-width:100%}</style>
+<title>Сборка Comfort</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600&family=Manrope:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap">
+</head>
+<body>
+<style>
+:root{
+  --void:#05070b; --deep:#080c13; --panel:#0c121b; --raise:#111925;
+  --line:#1b2634; --line-hot:#243447;
+  --ink:#e8f0f7; --mid:#93a6bb; --dim:#5d7085;
+  --neon:#3ce0c0; --neon-dim:#12463f; --blue:#6f9cff; --amber:#ffb454; --rose:#ff7a6b;
+  --glow:0 0 0 1px rgba(60,224,192,.22), 0 0 34px -8px rgba(60,224,192,.35);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; color:var(--ink); background:var(--void);
+  font:16px/1.6 Manrope,system-ui,-apple-system,'Segoe UI',sans-serif;
+  -webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(900px 520px at 78% -12%, rgba(60,224,192,.13), transparent 62%),
+    radial-gradient(760px 460px at 8% 4%, rgba(111,156,255,.10), transparent 60%),
+    linear-gradient(transparent 95%, rgba(255,255,255,.022) 95%),
+    linear-gradient(90deg, transparent 95%, rgba(255,255,255,.022) 95%);
+  background-size:auto,auto,34px 34px,34px 34px;
+  background-attachment:fixed;
+}
+button{color:inherit;appearance:none}
+:focus-visible{outline:2px solid var(--neon);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1080px;margin:0 auto;padding:34px 18px 90px}
+h1,h2,h3{font-family:Unbounded,Manrope,system-ui,sans-serif;margin:0;letter-spacing:-.02em;text-wrap:balance}
+.lab{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.16em;
+     text-transform:uppercase;color:var(--dim)}
+.lab.dim{color:#3f5165}
+
+.head{position:relative;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+      background:linear-gradient(160deg,var(--panel),var(--deep));padding:22px 24px}
+.head::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 44%,rgba(60,224,192,.07) 50%,transparent 56%)}
+.hrow{position:relative;display:flex;flex-wrap:wrap;gap:20px 26px;align-items:flex-end}
+.hwho{flex:1 1 300px;min-width:0}
+.head h1{font-size:clamp(23px,3.6vw,34px);line-height:1.12;margin-top:9px;font-weight:600}
+.src{margin:9px 0 0;color:var(--mid);font-size:14.5px;word-break:break-word}
+.src b{color:var(--neon);font-weight:500}
+.hmeter{flex:0 0 auto;display:flex;gap:26px;align-items:flex-end}
+.big{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:31px;font-weight:600;
+     line-height:1;display:block;font-variant-numeric:tabular-nums}
+.cap{font-size:12px;color:var(--dim);display:block;margin-top:7px}
+.rail{margin-top:15px;height:4px;border-radius:3px;background:#101823;overflow:hidden;position:relative}
+.rail i{display:block;height:100%;border-radius:3px;
+        background:linear-gradient(90deg,var(--blue),var(--neon));
+        box-shadow:0 0 14px rgba(60,224,192,.5);transition:width .6s ease}
+.live{display:inline-flex;align-items:center;gap:8px;padding:5px 11px;border-radius:999px;
+      border:1px solid var(--neon-dim);background:rgba(60,224,192,.07);color:var(--neon);
+      font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:.1em;
+      text-transform:uppercase}
+.live i{width:6px;height:6px;border-radius:50%;background:var(--neon);
+        box-shadow:0 0 0 0 rgba(60,224,192,.6);animation:pulse 1.7s infinite}
+.live[data-done="1"]{border-color:#24405c;background:rgba(111,156,255,.08);color:var(--blue)}
+.live[data-done="1"] i{background:var(--blue);animation:none}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgba(60,224,192,0)}100%{box-shadow:0 0 0 0 rgba(60,224,192,0)}}
+
+.team{margin-top:16px;border:1px solid var(--line);border-radius:18px;background:var(--panel);padding:16px 18px}
+.teamhead{display:flex;justify-content:space-between;gap:12px;margin-bottom:14px}
+.mates{list-style:none;margin:0;padding:0;display:grid;gap:10px;
+       grid-template-columns:repeat(auto-fill,minmax(178px,1fr))}
+.mate{position:relative;border:1px solid var(--line);border-radius:13px;background:var(--deep);
+      padding:12px 13px;display:flex;flex-direction:column;gap:3px;overflow:hidden;transition:.25s}
+.ava{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;
+     font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;font-weight:600;
+     background:#121b27;border:1px solid var(--line-hot);color:var(--dim);margin-bottom:7px}
+.mname{font-size:14.5px;font-weight:500;line-height:1.3}
+.mskill{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;color:#4a5e73;
+        letter-spacing:.03em;word-break:break-all}
+.mstate{font-size:12.5px;color:var(--dim);margin-top:5px}
+.mate[data-s="done"] .ava{color:var(--neon);border-color:var(--neon-dim);background:#0c1f1c}
+.mate[data-s="done"] .mstate{color:var(--mid)}
+.mate[data-s="run"]{border-color:rgba(60,224,192,.42);box-shadow:var(--glow);background:#0a1620}
+.mate[data-s="run"] .ava{color:var(--void);background:var(--neon);border-color:var(--neon)}
+.mate[data-s="run"] .mstate{color:var(--neon)}
+.mate[data-s="run"]::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--neon),transparent);animation:sweep 1.5s infinite}
+@keyframes sweep{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.mate[data-s="wait"]{opacity:.45}
+
+.steps{display:flex;flex-direction:column;gap:13px;margin-top:16px}
+.card{position:relative;border:1px solid var(--line);border-radius:18px;background:var(--panel);
+      padding:20px 22px}
+.card[data-s="run"]{border-color:rgba(60,224,192,.4);box-shadow:var(--glow)}
+.card[data-s="warn"]{border-color:rgba(255,180,84,.38)}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.no{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#3f5165;
+    font-variant-numeric:tabular-nums}
+.card h2{font-size:19px;flex:1 1 auto;min-width:0;font-weight:600}
+.by{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;color:var(--dim);
+    border:1px solid var(--line);border-radius:999px;padding:4px 9px;white-space:nowrap}
+.pill{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;letter-spacing:.09em;
+      text-transform:uppercase;padding:4px 10px;border-radius:999px;border:1px solid var(--line);
+      color:var(--dim);white-space:nowrap}
+.card[data-s="done"] .pill{color:var(--neon);border-color:var(--neon-dim)}
+.card[data-s="run"] .pill{color:var(--void);background:var(--neon);border-color:var(--neon)}
+.card[data-s="warn"] .pill{color:var(--amber);border-color:rgba(255,180,84,.4)}
+.note{margin:12px 0 0;color:var(--mid);max-width:70ch}
+
+.say{display:flex;gap:12px;margin-top:14px;align-items:flex-start}
+.say .bot{flex:0 0 30px;width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+          background:linear-gradient(150deg,var(--neon),var(--blue));color:var(--void);
+          font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;font-weight:700}
+.say p{margin:0;background:var(--raise);border:1px solid var(--line);border-radius:4px 14px 14px 14px;
+       padding:11px 15px;font-size:15.5px;line-height:1.55;max-width:64ch}
+
+.chips{list-style:none;display:flex;flex-wrap:wrap;gap:7px;margin:15px 0 0;padding:0}
+.chips li{background:var(--raise);border:1px solid var(--line);border-radius:999px;
+          padding:5px 12px;font-size:13.5px;color:var(--mid)}
+.facts{list-style:none;margin:15px 0 0;padding:0;display:flex;flex-direction:column;gap:9px}
+.facts li{display:flex;gap:11px;align-items:flex-start;font-size:15px}
+.facts .bul{width:8px;height:8px;border-radius:50%;margin-top:8px;flex:0 0 8px;background:var(--neon)}
+.facts li[data-s="run"] .bul{background:var(--amber)}
+.facts li[data-s="warn"] .bul{background:var(--rose)}
+.facts li[data-s="wait"] .bul{background:var(--line-hot)}
+.facts li[data-s="wait"]{color:var(--dim)}
+.nums{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px}
+.nums div{flex:1 1 120px;border:1px solid var(--line);border-radius:12px;background:var(--deep);padding:12px 14px}
+.nums b{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:23px;font-weight:600;
+        display:block;line-height:1.1;color:var(--neon);font-variant-numeric:tabular-nums}
+.nums span{font-size:12.5px;color:var(--dim)}
+
+.log{list-style:none;margin:15px 0 0;padding:13px 15px;border:1px solid var(--line);border-radius:12px;
+     background:#070b11;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;
+     color:var(--mid);display:flex;flex-direction:column;gap:6px;max-height:190px;overflow:auto}
+.log li{display:flex;gap:9px}
+.log li::before{content:"\203A";color:var(--neon);flex:0 0 auto}
+
+.doc{margin-top:15px;border:1px solid var(--line);border-radius:13px;background:var(--deep);overflow:hidden}
+.doc + .doc{margin-top:9px}
+.doc summary{display:flex;align-items:center;gap:11px;padding:13px 15px;cursor:pointer;list-style:none}
+.doc summary::-webkit-details-marker{display:none}
+.dicon{flex:0 0 16px;width:16px;height:20px;border-radius:2px;border:1px solid var(--line-hot);
+       background:linear-gradient(180deg,#16212e,#0d141d);position:relative}
+.dicon::after{content:"";position:absolute;left:3px;right:3px;top:5px;height:1px;background:var(--dim);
+              box-shadow:0 4px 0 var(--dim),0 8px 0 var(--dim)}
+.dname{font-size:14.5px;flex:1 1 auto;min-width:0}
+.dmeta{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;color:var(--neon);white-space:nowrap}
+.dopen{font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10.5px;color:var(--dim);
+       border:1px solid var(--line);border-radius:999px;padding:3px 9px;white-space:nowrap}
+.doc pre{margin:0;padding:14px 15px 15px;white-space:pre-wrap;word-break:break-word;
+         font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12.5px;line-height:1.7;
+         color:var(--mid);max-height:460px;overflow:auto;border-top:1px solid var(--line)}
+
+.shots{display:grid;gap:13px;margin-top:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.shots figure{margin:0;min-width:0}
+.shots figure.phone{max-width:270px}
+.shots img,.shots video{width:100%;display:block;border-radius:12px;border:1px solid var(--line);background:#000}
+.shots figcaption{font-size:12.5px;color:var(--dim);margin-top:8px}
+
+.ahead{border:1px dashed var(--line);border-radius:18px;padding:15px 20px}
+.ahead .lab{display:block;margin-bottom:11px}
+.ahead ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:9px 22px}
+.ahead li{color:var(--dim);font-size:14.5px;display:flex;gap:9px;align-items:baseline}
+
+.foot{margin-top:26px;padding-top:17px;border-top:1px solid var(--line);
+      display:flex;flex-wrap:wrap;gap:8px 20px;color:var(--dim);font-size:13.5px}
+.foot a{color:var(--neon)}
+@media (max-width:560px){
+  .wrap{padding:22px 16px 70px}
+  .head{padding:18px 16px;border-radius:15px}
+  .hmeter{gap:20px}
+  .card{padding:17px 16px;border-radius:15px}
+  .mates{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<div class="wrap" data-live="1">
+  <header class="head">
+    <div class="hrow">
+      <div class="hwho">
+        <span class="live" data-done="0"><i></i>агент работает</span>
+        <h1>Стоматологія Comfort</h1>
+        <p class="src">Взял в работу <b>comfort-stom.kiev.ua</b></p>
+      </div>
+      <div class="hmeter">
+        <div><b class="big" id="clock" data-from="268">00:00</b><span class="cap">в работе</span></div>
+        <div><b class="big">2/10</b><span class="cap">этапов</span></div>
+      </div>
+    </div>
+    <div class="rail"><i style="width:20%"></i></div>
+  </header>
+<section class="team"><div class="teamhead"><span class="lab">команда агента</span><span class="lab dim">9 в штате</span></div><ul class="mates"><li class="mate" data-s="done"><span class="ava">ИС</span><span class="mname">Исследователь</span><span class="mskill">разбор сайта клиники</span><span class="mstate">снял 34 факта</span></li><li class="mate" data-s="done"><span class="ava">АН</span><span class="mname">Аналитик</span><span class="mskill">competitor-alternatives</span><span class="mstate">разобрал 5 клиник</span></li><li class="mate" data-s="run"><span class="ava">МА</span><span class="mname">Маркетолог</span><span class="mskill">client-dna</span><span class="mstate">пишет ДНК клиента</span></li><li class="mate" data-s="wait"><span class="ava">СТ</span><span class="mname">Стратег</span><span class="mskill">hunt-ladder</span><span class="mstate">ждёт</span></li><li class="mate" data-s="wait"><span class="ava">КО</span><span class="mname">Копирайтер</span><span class="mskill">copywriting</span><span class="mstate">ждёт</span></li><li class="mate" data-s="wait"><span class="ava">АР</span><span class="mname">Архитектор</span><span class="mskill">site-architecture</span><span class="mstate">ждёт</span></li><li class="mate" data-s="wait"><span class="ava">КО</span><span class="mname">Конверсия</span><span class="mskill">page-cro</span><span class="mstate">ждёт</span></li><li class="mate" data-s="wait"><span class="ava">ВИ</span><span class="mname">Видеограф</span><span class="mskill">seedance-master</span><span class="mstate">ждёт</span></li><li class="mate" data-s="wait"><span class="ava">РА</span><span class="mname">Разработчик</span><span class="mskill">PATTERN + taste-skill</span><span class="mstate">ждёт</span></li></ul></section>
+  <div class="steps">
+<section class="card" data-s="done"><div class="top"><span class="no">01</span><h2>Разбираю клинику</h2><span class="by">Исследователь</span><span class="pill">готово</span></div><p class="note">Прошёл главную и все внутренние страницы услуг, собрал то, что клиника уже про себя рассказала.</p><div class="say"><span class="bot">AI</span><p>Так, сайт открыл. Прошёл все страницы услуг, выписал цены, врачей, оборудование, часы работы. Дальше смотрю, кто ещё лечит зубы в этом районе.</p></div><ul class="chips"><li>пр. Червоної Калини, 67, Троєщина</li><li>щодня 9:00–20:00</li><li>консультація безкоштовна</li><li>гарантія 6–12 місяців</li><li>рентген постійним клієнтам безкоштовно</li></ul><ul class="facts"><li data-s="done"><span class="bul"></span>Врачи с именами и стажем: главный врач и директор, оба УАНМ 2008</li><li data-s="done"><span class="bul"></span>Оборудование: КТ, микроскоп, Air Flow, лазерное отбеливание, своя фрезеровка</li><li data-s="done"><span class="bul"></span>Прайс открыт полностью, от пломбы 850 грн до импланта 17 500 грн</li><li data-s="warn"><span class="bul"></span>Отзывы есть, но картинками в слайдере, текста нет</li></ul><ul class="log"><li>открыл comfort-stom.kiev.ua</li><li>обошёл 14 внутренних страниц</li><li>вытащил прайс: 30 позиций</li><li>нашёл соцсети: Instagram, Facebook, YouTube</li><li>сохранил в cache/01-klinika.md</li></ul><details class="doc"><summary><span class="dicon"></span><span class="dname">Разбор клиники: факты, команда, прайс</span><span class="dmeta">288 слов</span><span class="dopen">открыть</span></summary><pre># Клиент (обкатка): Стоматология Comfort, Троещина
+
+Источник: comfort-stom.kiev.ua, вытащено 2026-08-20. Это сырьё для content нового сайта.
+
+## Факты
+- Название: Стоматологія Comfort / Comfort Dental Clinic
+- Адрес: пр. Червоної Калини, 67, Троєщина, Київ (Деснянський район)
+- Телефон: (067) 604 17 13
+- Часы: ежедневно 9:00–20:00
+- Соцсети: IG @comfort.dental_clinic, Facebook, YouTube
+- Консультация бесплатная. Гарантия на работы 6–12 мес.
+- Ориентиры рядом: ТРЦ Фестивальний, Sport Life, ТРЦ Район
+
+## Команда
+- Карпук Андрій Миколайович, главный врач: хирург-имплантолог, ортопед, терапевт (УАНМ 2008)
+- Єльченко Валерія Валеріївна, директор: терапевт, эндодонт, реставратор (УАНМ 2008)
+- Плюс: ортодонт, гигиенист-пародонтолог, зубной техник, медсестра, администратор
+
+## Оборудование и фишки
+Air Flow, лазерное отбеливание Magic Smile, КТ, прицельный рентген (постоянным
+клиентам бесплатно), микроскоп для каналов, цифровая стоматология (фрезеровка
+коронок и виниров).
+
+## Прайс (полный, грн)
+- Комплексная чистка: 650–2000
+- Отбеливание кабинетное: 3900–5900; капа домашняя: 2500
+- Виниры керамические: 8000; фотополимерные: 2100
+- Коронки: металлокерамика 4700–5700; цирконий 6700–11000; на импланте 10250–13000
+- Пломбы: 850–1500; реставрация: 1800–3000
+- Каналы: 1-кан. 850–1800 … 4-кан. 3400–5000
+- Имплант: 12000–17500
+- Съёмные протезы: акрил 6000; нейлон 8800–15000; бюгель 10500–18000
+- Удаление: 850–2500; зуб мудрости атипично: 2500–3500
+- Брекеты: от 15000
+- Рентген: 100–150
+
+## Структура их сайта
+Меню: Про нас, Послуги, Прайс, Акції, Фото, Контакти.
+SEO-страницы под каждую услугу (/prajs/, /vinyry-…, /vidbilennya-… и т.д.).
+Отзывы: слайдер из 19 картинок-скринов, текста нет.
+
+## Диагноз их сайта (для «было/стало»)
+- Кричащий тайтл «Чистка зубів 2000 грн !!!», восклицания по всему сайту
+- Один и тот же абзац повторён 12+ раз, грамматические ошибки
+- Нет внятной навигации и иерархии, простыни текста
+- Адаптив под мобилку сомнительный
+- Отзывы картинками в слайдере, не читаются
+- Козырь, который они сами не подают: полный прозрачный прайс (у большинства
+  конкурентов цен на сайте нет вообще)
+</pre></details><div class="nums"><div><b>34</b><span>факта о клинике</span></div><div><b>30</b><span>позиций прайса</span></div><div><b>14</b><span>страниц прочитано</span></div></div></section>
+<section class="card" data-s="done"><div class="top"><span class="no">02</span><h2>Смотрю, с кем конкурируем</h2><span class="by">Аналитик · competitor-alternatives</span><span class="pill">готово</span></div><p class="note">Смотрел одно: что клиника показывает и что прячет. Referta, iStomatolog, Coral Dent, Євродентал, госсеть.</p><div class="say"><span class="bot">AI</span><p>Разобрал пять клиник рядом. Интересная штука: почти никто не показывает цены, пишут «звоните, узнаете». А у нашей клиники прайс открыт полностью. Вот на этом и будем строить.</p></div><ul class="chips"><li>цены прячут 4 из 5</li><li>меню на 80+ пунктов</li><li>«висококваліфіковані спеціалісти» без конкретики</li><li>у сильных отзывы текстом и до/после</li></ul><ul class="facts"><li data-s="done"><span class="bul"></span>Главная отстройка найдена: честные цены сразу на сайте</li><li data-s="done"><span class="bul"></span>Забираем у сильных: отзывы текстом, галерея до/после, мессенджеры в один клик</li><li data-s="done"><span class="bul"></span>Не повторяем: перегруз меню, шаблонные тексты, спрятанный прайс</li></ul><ul class="log"><li>разобрал 5 сайтов конкурентов</li><li>Lumi-Dent закрыт от ботов, пропустил</li><li>сравнил прайсы: открыт только у одного из пяти</li><li>сохранил в cache/02-konkurenty.md</li></ul><details class="doc"><summary><span class="dicon"></span><span class="dname">Конкуренты: что показывают и что прячут</span><span class="dmeta">344 слов</span><span class="dopen">открыть</span></summary><pre># Анализ конкурентов: стоматологии Киева против Comfort
+
+Разобраны: Referta (Позняки/Осокорки), iStomatolog (Дарница), Coral Dent
+(Оболонь), Євродентал (Оболонь), КНП «Київська стоматологія» (госсеть).
+Lumi-Dent закрыт от ботов (403).
+
+## 1. Что есть у сильных, чего нет у Comfort (внедряем)
+- Отзывы текстом с рейтингами и датами, у Referta даже видео-отзывы
+  (у Comfort: слайдер из 19 нечитаемых картинок)
+- Галерея работ «до/после» как отдельный продающий блок
+  (у Comfort только фото клиники и врачей)
+- Аккуратная запись: заметная кнопка + мессенджеры в один клик
+  (у Coral Dent: Viber и Telegram прямо в шапке)
+- Рейтинги внешних площадок на виду: Google 4.9–5.0, doc.ua
+- Чистая структура услуг: карточки направлений вместо простыни текста
+
+## 2. Общие слабости конкурентов (отстройка)
+- Цен на сайте нет почти ни у кого: «позвоните и узнайте»
+  (Referta, Eurodental, iStomatolog прячут прайс)
+- Перегруз: меню на 80+ пунктов (Eurodental), дубли контента (Referta, Coral)
+- Шаблонные тексты «висококваліфіковані спеціалісти» без конкретики
+- Медленная загрузка, плейсхолдеры вместо картинок
+
+## 3. Скрытые козыри Comfort (выпячиваем)
+- Полный прозрачный прайс на всё, от пломбы до импланта. На фоне рынка,
+  где цены прячут, это главная отстройка: «честные цены сразу на сайте»
+- Бесплатная консультация и бесплатный рентген постоянным клиентам
+- Гарантия 6–12 месяцев прописана с условиями
+- Врачи-универсалы с 18-летним стажем (УАНМ 2008), муж и жена = семейная
+  клиника, тёплая история для «о нас»
+- Техника не хуже сетей: КТ, микроскоп, лазерное отбеливание, цифровая
+  фрезеровка. Сайт об этом бубнит в простынях, надо показать карточками
+- Локация с ориентирами (ТРЦ Фестивальний, Район): районная клиника
+  «в 5 минутах от дома»
+
+## Приоритет улучшений для нового сайта
+1. Герой: семейная клиника на Троещине + честные цены + кнопка записи
+   (мессенджер в один клик), телефон виден сразу
+2. Прайс как фича, красивая таблица по направлениям
+3. Услуги карточками, 6-8 направлений человеческим языком
+4. До/после галерея (взять их фото работ из IG, если на сайте нет)
+5. Отзывы: перепечатать текст с картинок-скринов + рейтинг Google
+6. Врачи: две персоны с фото и стажем
+7. Блок «почему мы»: гарантия, бесплатная консультация, КТ и микроскоп
+8. Карта и ориентиры, часы работы
+9. Мобилка первым делом, липкая кнопка записи
+</pre></details><div class="nums"><div><b>5</b><span>клиник разобрано</span></div><div><b>4/5</b><span>прячут цены</span></div><div><b>3</b><span>козыря клиники</span></div></div></section>
+<section class="card" data-s="run"><div class="top"><span class="no">03</span><h2>Пишу ДНК клиента</h2><span class="by">Маркетолог · client-dna</span><span class="pill">в работе</span></div><p class="note">Разбор по методологии ДНК Клиента: пять частей от идентичности до механики покупки.</p><div class="say"><span class="bot">AI</span><p>Теперь самое главное. Разбираю, кто вообще платит за импланты в этом районе, чего этот человек боится и что его останавливает. Это пять больших частей, работаю по методике, которой меня учили.</p></div><ul class="facts"><li data-s="done"><span class="bul"></span>Часть 1. Идентичность, ценности, мировоззрение</li><li data-s="run"><span class="bul"></span>Часть 2. Боли, страхи и триггеры</li><li data-s="wait"><span class="bul"></span>Часть 3. Барьеры, мифы и прошлый опыт</li><li data-s="wait"><span class="bul"></span>Часть 4. Трансформация и возражения</li><li data-s="wait"><span class="bul"></span>Часть 5. Триггеры покупки и механика</li></ul><ul class="log"><li>взял контекст из шагов 1 и 2</li><li>часть 1 готова: 4 сегмента</li><li>пишу часть 2: боли и страхи</li></ul></section>
+<section class="ahead"><span class="lab">дальше по плану</span><ol><li><span class="no">04</span>Разбираю аудиторию по стадиям</li><li><span class="no">05</span>Собираю оффер и тексты</li><li><span class="no">06</span>Проектирую структуру сайта</li><li><span class="no">07</span>Проверяю на конверсию</li><li><span class="no">08</span>Снимаю видео для первого экрана</li><li><span class="no">09</span>Собираю сайт</li><li><span class="no">10</span>Проверяю и показываю мобильную</li></ol></section>
+  </div>
+  <footer class="foot"><span>Папка: сайт/</span><span>Обновлено: 10.09, 17:02</span></footer>
+</div>
+<script>
+(function(){
+  var el = document.getElementById('clock');
+  if(!el) return;
+  var s = parseInt(el.getAttribute('data-from') || '0', 10);
+  var live = document.querySelector('.wrap').getAttribute('data-live') === '1';
+  function p(n){ return (n < 10 ? '0' : '') + n; }
+  function tick(){
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), x = s % 60;
+    el.textContent = (h > 0 ? h + ':' + p(m) : p(m)) + ':' + p(x);
+    s += 1;
+  }
+  tick();
+  if(live) setInterval(tick, 1000);
+})();
+</script>
+
+</body>
+</html>
