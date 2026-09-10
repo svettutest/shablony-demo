@@ -436,7 +436,9 @@ Lumi-Dent закрыт от ботов (403).
 (function(){
   var A = window.__ART__, CREW = window.__CREW__, LAY = window.__LAY__;
   var TILE = 16, COLS = 30, ROWS = 17, CARPET = window.__CARPET__;
-  var cv = document.getElementById('office'), cx = cv.getContext('2d');
+  var cv = document.getElementById('office');
+  if(!cv) return;
+  var cx = cv.getContext('2d');
   cv.width = COLS * TILE; cv.height = ROWS * TILE;
   cx.imageSmoothingEnabled = false;
 
@@ -615,15 +617,17 @@ Lumi-Dent закрыт от ботов (403).
       return a;
     });
 
+    /* строка состояния и карточки есть не на всякой странице: без них тоже работаем */
     var cards = [].slice.call(document.querySelectorAll('.card'));
+    var who = document.getElementById('who'), what = document.getElementById('what');
     function setActive(k){
       agents.forEach(function(a, n){
         a.busy = (n === k);
         if(n === k) a.wait = Math.min(a.wait, 0.2);
       });
       cards.forEach(function(el, n){ el.setAttribute('data-on', n === k ? '1' : '0'); });
-      document.getElementById('who').textContent = CREW[k].name;
-      document.getElementById('what').textContent = CREW[k].doing;
+      if(who) who.textContent = CREW[k].name;
+      if(what) what.textContent = CREW[k].doing;
     }
     window.__setActive = setActive;
     setActive(typeof window.__ACTIVE__ === 'number' ? window.__ACTIVE__ : 0);
