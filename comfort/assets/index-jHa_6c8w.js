@@ -154,7 +154,7 @@ Error generating stack: `+s.message+`
         .sw-root .sw-copy { width:min(62vw,780px); max-width:780px; }
         .sw-root .sw-copy__title {
           font-family:${Ci}; font-weight:700; color:#111111;
-          letter-spacing:-0.025em; line-height:0.93; text-transform:none;
+          letter-spacing:-0.015em; line-height:0.93; text-transform:uppercase;
           font-size:clamp(2.8rem,6.2vw,5.6rem); max-width:none;
           margin:14px 0 14px;
         }
