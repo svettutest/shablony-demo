@@ -151,12 +151,12 @@ Error generating stack: `+s.message+`
         .sw-root .sw-btn--ghost { color:#111111; font-weight:600; }
         /* у движка блок текста всего 460px, из-за этого заголовок ломался
            на три строки. Расширяем под крупный двухстрочный, как на сайте */
-        .sw-root .sw-copy { width:min(62vw,780px); max-width:780px; }
+        .sw-root .sw-copy { width:min(74vw,980px); max-width:980px; }
         .sw-root .sw-copy__title {
           font-family:${yw}; font-weight:700; color:#111111;
-          letter-spacing:-0.03em; line-height:1.02; text-transform:uppercase;
-          font-size:clamp(1.9rem,3.9vw,3.4rem); max-width:16ch;
-          margin:12px 0 14px;
+          letter-spacing:-0.035em; line-height:1.04; text-transform:uppercase;
+          font-size:clamp(2.1rem,4.6vw,4.2rem); max-width:none;
+          margin:12px 0 16px;
         }
         .sw-root .sw-copy__eyebrow {
           font-family:${cs}; font-weight:700; font-size:.82rem;
